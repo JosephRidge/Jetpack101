@@ -6,16 +6,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.emobilis.jetpack101.ui.screens.about.AboutScreen
+import com.emobilis.jetpack101.ui.screens.contactus.ContactUsScreen
 import com.emobilis.jetpack101.ui.screens.home.HomePage
-import kotlinx.serialization.Serializable
 
-/*
-* ref: https://developer.android.com/guide/navigation
-* */
-@Serializable
-object Home
-@Serializable
-object About
 
 @Composable
 fun Navigation(
@@ -28,6 +21,7 @@ fun Navigation(
     ) {
         composable <Home>{ HomePage(modifier) }
         composable <About>{ AboutScreen(modifier) }
+        composable<ContactUs> { ContactUsScreen(modifier) }
     }
 
 }

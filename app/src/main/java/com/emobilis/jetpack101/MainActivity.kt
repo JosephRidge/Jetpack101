@@ -30,9 +30,11 @@ import androidx.navigation.compose.rememberNavController
 import coil3.compose.AsyncImage
 import com.emobilis.jetpack101.data.model.Route
 import com.emobilis.jetpack101.ui.navigation.About
+import com.emobilis.jetpack101.ui.navigation.ContactUs
 import com.emobilis.jetpack101.ui.navigation.Home
 import com.emobilis.jetpack101.ui.navigation.Navigation
 import com.emobilis.jetpack101.ui.screens.home.HomePage
+import com.emobilis.jetpack101.ui.theme.GOLD
 import com.emobilis.jetpack101.ui.theme.Jetpack101Theme
 
 class MainActivity : ComponentActivity() {
@@ -41,11 +43,12 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             Jetpack101Theme {
-                val navController = rememberNavController()
+                val navController = rememberNavController() // instance of the navcontoller
 
                 Scaffold(
-                    bottomBar = {BottomNavigation(navController)},
-                    modifier = Modifier.fillMaxSize()) { innerPadding ->
+                    bottomBar = { BottomNavigation(navController) },
+                    modifier = Modifier.fillMaxSize()
+                ) { innerPadding ->
                     Navigation(
                         navHostController = navController,
                         modifier = Modifier.padding(innerPadding)
@@ -59,36 +62,34 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun BottomNavigation(
     navHostController: NavHostController
-){
+) {
 
     val routes = listOf(
-        Route("Home", Home,R.drawable.baseline_home_24),
-        Route("About", About,R.drawable.contact_support )
+        Route("Home", Home, R.drawable.baseline_home_24),
+        Route("About", About, R.drawable.contact_support),
+        Route("Contact Us", ContactUs, R.drawable.support_agent)
     )
 
-        NavigationBar() {
-            routes.forEach {
-                route ->
-                NavigationBarItem(
-                    onClick = {
-                        navHostController.navigate(route.route)
-                    },
-                    selected = false,
-                    icon = {
-                        Icon(
-                            painter = painterResource(
-                                route.icon
-                            ),
-                            contentDescription = "Navigate to ${route.name}"
-                        )
-                    }
-                )
-            }
-
+    NavigationBar() {
+        routes.forEach { route ->
+            NavigationBarItem(
+                onClick = {
+                    navHostController.navigate(route.route)
+                },
+                selected = false,
+                icon = {
+                    Icon(
+                        painter = painterResource(
+                            route.icon
+                        ),
+                        tint = GOLD,
+                        contentDescription = "Navigate to ${route.name}"
+                    )
+                }
+            )
         }
 
-
-
+    }
 }
 
 
@@ -97,7 +98,9 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = modifier.fillMaxSize().padding(8.dp)
+        modifier = modifier
+            .fillMaxSize()
+            .padding(8.dp)
     ) {
         Text(
             text = "Jetpack Compose 101",
@@ -136,6 +139,6 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 @Composable
 fun GreetingPreview() {
     Jetpack101Theme {
-        Greeting("Android")
+        HomePage(modifier = Modifier)
     }
 }
