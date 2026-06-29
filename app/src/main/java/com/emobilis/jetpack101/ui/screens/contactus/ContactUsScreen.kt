@@ -91,7 +91,7 @@ fun ContactUsScreen(
 
 //     input form
         Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
+            horizontalAlignment = Alignment.End,
 modifier= Modifier.padding(contentPadding)
         ) {
              OutlinedTextField(
@@ -143,8 +143,8 @@ modifier= Modifier.padding(contentPadding)
                 Row(
                      verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Text("Send Message")
-                    Spacer(modifier = Modifier.width(4.dp))
+//                    Text("Send")
+//                    Spacer(modifier = Modifier.width(4.dp))
                     Icon(
                         painter = painterResource(R.drawable.send_icon),
                         contentDescription = "Send message section"
