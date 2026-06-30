@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -51,7 +52,8 @@ class MainActivity : ComponentActivity() {
                 ) { innerPadding ->
                     Navigation(
                         navHostController = navController,
-                        modifier = Modifier.padding(innerPadding)
+                        modifier = Modifier.padding(innerPadding),
+                        innerPadding
                     )
                 }
             }
@@ -66,8 +68,8 @@ fun BottomNavigation(
 
     val routes = listOf(
         Route("Home", Home, R.drawable.baseline_home_24),
-        Route("About", About, R.drawable.contact_support),
-        Route("Contact Us", ContactUs, R.drawable.support_agent)
+        Route("Contact Us", ContactUs, R.drawable.support_agent),
+        Route("About", About, R.drawable.contact_support)
     )
 
     NavigationBar() {
@@ -75,6 +77,14 @@ fun BottomNavigation(
             NavigationBarItem(
                 onClick = {
                     navHostController.navigate(route.route)
+                },
+                label = {
+                    Text(
+                        text = route.name,
+                        style = TextStyle(
+                            color = GOLD
+                        )
+                        )
                 },
                 selected = false,
                 icon = {
@@ -139,6 +149,6 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 @Composable
 fun GreetingPreview() {
     Jetpack101Theme {
-        HomePage(modifier = Modifier)
+        Greeting(modifier = Modifier, name = "Android")
     }
 }
