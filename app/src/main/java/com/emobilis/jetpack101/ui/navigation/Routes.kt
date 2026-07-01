@@ -13,3 +13,12 @@ object About
 
 @Serializable
 object ContactUs
+
+@Serializable
+object SEO
+
+@Serializable
+object Marketing
+
+@Serializable
+object WebDevelopment

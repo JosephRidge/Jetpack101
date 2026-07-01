@@ -1,6 +1,7 @@
 package com.emobilis.jetpack101.ui.screens.home
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -31,7 +32,12 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import coil3.compose.AsyncImage
+import com.emobilis.jetpack101.ui.navigation.Home
+import com.emobilis.jetpack101.ui.navigation.Marketing
+import com.emobilis.jetpack101.ui.navigation.SEO
+import com.emobilis.jetpack101.ui.navigation.WebDevelopment
 import com.emobilis.jetpack101.ui.theme.GOLD
 
 /*
@@ -40,7 +46,7 @@ import com.emobilis.jetpack101.ui.theme.GOLD
 *   - UI
 * */
 @Composable
-fun HomePage(modifier: Modifier, innerPadding: PaddingValues){
+fun HomePage(modifier: Modifier, innerPadding: PaddingValues, navHostController: NavHostController){
     val configuration = LocalConfiguration.current
     val screenHeightDp = configuration.screenHeightDp.dp
     val screenWidthDp = configuration.screenWidthDp.dp
@@ -49,16 +55,19 @@ fun HomePage(modifier: Modifier, innerPadding: PaddingValues){
     val services = arrayOf<Map<String, Any>>(
         mapOf(
             "service" to "SEO",
+            "route" to SEO,
             "image" to "https://images.pexels.com/photos/7688453/pexels-photo-7688453.jpeg",
             "cost" to "Starts from $25"
         ),
         mapOf(
             "service" to "Marketing",
+            "route" to Marketing,
             "image" to "https://images.pexels.com/photos/15635398/pexels-photo-15635398.jpeg",
             "cost" to "Starts from $15"
         ),
         mapOf(
             "service" to "Web Design",
+            "route" to WebDevelopment,
             "image" to "https://images.pexels.com/photos/32342294/pexels-photo-32342294.jpeg",
             "cost" to "Starts from $65"
         ),
@@ -138,7 +147,18 @@ fun HomePage(modifier: Modifier, innerPadding: PaddingValues){
             items(services) {
                 service ->
                 Card(
-                    modifier = Modifier.padding(horizontal = 8.dp , vertical = 12.dp),
+                    modifier = Modifier
+                        .clickable(
+                            onClick = {
+                                when (service["service"]) {
+                                    "SEO" -> navHostController.navigate(SEO)
+                                    "Web Design" -> navHostController.navigate(WebDevelopment)
+                                    "Marketing" -> navHostController.navigate(Marketing)
+                                    else -> navHostController.navigate(Home)
+                                }
+                            }
+                        )
+                        .padding(horizontal = 8.dp , vertical = 12.dp),
                     shape = RoundedCornerShape(30.dp)
                 ) {
                     Box(){

@@ -10,6 +10,9 @@ import androidx.navigation.compose.composable
 import com.emobilis.jetpack101.ui.screens.about.AboutScreen
 import com.emobilis.jetpack101.ui.screens.contactus.ContactUsScreen
 import com.emobilis.jetpack101.ui.screens.home.HomePage
+import com.emobilis.jetpack101.ui.screens.marketing.MarketingScreen
+import com.emobilis.jetpack101.ui.screens.seo.SEOScreen
+import com.emobilis.jetpack101.ui.screens.webdevelopment.WebDevelopment
 
 
 @Composable
@@ -22,9 +25,12 @@ fun Navigation(
         navController = navHostController,
         startDestination = Home
     ) {
-        composable <Home>{ HomePage(modifier, innerPaddingValues) }
+        composable <Home>{ HomePage(modifier, innerPaddingValues, navHostController) }
         composable <About>{ AboutScreen(modifier) }
         composable<ContactUs> { ContactUsScreen(modifier) }
+        composable<SEO> { SEOScreen(modifier) }
+        composable <Marketing>{ MarketingScreen(modifier) }
+        composable <WebDevelopment>{ WebDevelopment(modifier) }
     }
 
 }

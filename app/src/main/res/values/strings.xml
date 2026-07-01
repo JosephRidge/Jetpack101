@@ -1,5 +1,13 @@
 <resources>
     <string name="app_name">Jetpack101</string>
+    <string name="marketing_title">Growth Marketing</string>
+    <string name="marketing_text">Our unified approach fuses world-class web design with aggressive data-driven marketing to turn casual visitors into loyal customers</string>
+    <string name="web_design_title">Web Design: Built to convert</string>
+    <string name="web_design_text">We don\'t just build beautiful websites; we engineer high-converting digital storefronts.</string>
+    <string name="seo_title">Search Engine Optimization(SEO)</string>
+    <string name="seo_text">We take the guesswork out of organic growth. Our specialized SEO service optimizes your digital footprint to place your brand directly in front of high-intent buyers on Google. </string>
+    <string name="about_us_title">All Your Marketing, Managed in Place</string>
+    <string name="about_us_text">Meet the world\'s first marketing agency inside an app. We built M-Agent to eliminate messy email chains, black-box reporting, and delayed launches.</string>
     <string name="contact_us_title">Coffee chat with us!</string>
     <string name="contact_us_image_description">Contact Us Image</string>
     <string name="contact_us_text">We believe in transparent, honest and respectful communication. You are our priority</string>

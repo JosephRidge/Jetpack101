@@ -30,6 +30,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import coil3.compose.AsyncImage
 import com.emobilis.jetpack101.data.model.Route
+import com.emobilis.jetpack101.ui.components.BottomNavigation
 import com.emobilis.jetpack101.ui.navigation.About
 import com.emobilis.jetpack101.ui.navigation.ContactUs
 import com.emobilis.jetpack101.ui.navigation.Home
@@ -58,97 +59,5 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
-    }
-}
-
-@Composable
-fun BottomNavigation(
-    navHostController: NavHostController
-) {
-
-    val routes = listOf(
-        Route("Home", Home, R.drawable.baseline_home_24),
-        Route("Contact Us", ContactUs, R.drawable.support_agent),
-        Route("About", About, R.drawable.contact_support)
-    )
-
-    NavigationBar() {
-        routes.forEach { route ->
-            NavigationBarItem(
-                onClick = {
-                    navHostController.navigate(route.route)
-                },
-                label = {
-                    Text(
-                        text = route.name,
-                        style = TextStyle(
-                            color = GOLD
-                        )
-                        )
-                },
-                selected = false,
-                icon = {
-                    Icon(
-                        painter = painterResource(
-                            route.icon
-                        ),
-                        tint = GOLD,
-                        contentDescription = "Navigate to ${route.name}"
-                    )
-                }
-            )
-        }
-
-    }
-}
-
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Column(
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = modifier
-            .fillMaxSize()
-            .padding(8.dp)
-    ) {
-        Text(
-            text = "Jetpack Compose 101",
-            fontSize = 24.sp,
-            color = Color.Blue,
-            fontWeight = FontWeight.Bold,
-            modifier = modifier
-        )
-
-        Text(
-            text = stringResource(R.string.world_cup),
-            fontSize = 12.sp
-        )
-        AsyncImage(
-            model = "https://images.pexels.com/photos/35842700/pexels-photo-35842700.jpeg",
-            contentDescription = "Image of stallion",
-            modifier = Modifier.size(200.dp)
-        )
-
-        Text(
-            text = "Hello $name! welcome home",
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold,
-            modifier = modifier
-        )
-        Text(
-            text = stringResource(R.string.lorem_text),
-            fontSize = 14.sp,
-            modifier = modifier
-        )
-    }
-
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    Jetpack101Theme {
-        Greeting(modifier = Modifier, name = "Android")
     }
 }

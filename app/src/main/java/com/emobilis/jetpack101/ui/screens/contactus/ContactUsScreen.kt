@@ -1,5 +1,6 @@
 package com.emobilis.jetpack101.ui.screens.contactus
 
+import android.annotation.SuppressLint
 import android.widget.Space
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.scrollable
@@ -43,6 +44,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -51,6 +53,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import com.emobilis.jetpack101.R
+import com.emobilis.jetpack101.ui.components.PageTopSection
+import com.emobilis.jetpack101.ui.components.contentPadding
 import com.emobilis.jetpack101.ui.theme.GOLD
 
 @Composable
@@ -58,14 +62,12 @@ fun ContactUsScreen(
     modifier: Modifier
 ) {
     val scrollState = rememberScrollState()
-    val contentPadding = 16.dp
+    val messageInput = rememberTextFieldState("")// remember{ mutableStateOf("") }
+    val titleInput = rememberTextFieldState("")
+    val phoneNumber = rememberTextFieldState("")
 
-    var messageInput = rememberTextFieldState("")// remember{ mutableStateOf("") }
-    var titleInput = rememberTextFieldState("")
-    var phoneNumber = rememberTextFieldState("")
-    val configuration = LocalConfiguration.current
-    val screenHeightDp = configuration.screenHeightDp.dp
-    val screenWidthDp = configuration.screenWidthDp.dp
+    val screenHeightDp = LocalWindowInfo.current.containerSize.height.dp
+    val screenWidthDp = LocalWindowInfo.current.containerSize.width.dp
 
     Column(
         modifier = Modifier
@@ -73,43 +75,14 @@ fun ContactUsScreen(
             .background(Color.Black)
             .verticalScroll(scrollState)
     ) {
-        AsyncImage(
-            model = R.drawable.contact_us,
-            contentDescription = stringResource(R.string.contact_us_image_description),
-            contentScale = ContentScale.Crop,
-            modifier = Modifier
-                .height(screenHeightDp * 0.2f)
-                .width(screenWidthDp)
-        )
-        Column(
-            verticalArrangement = Arrangement.Bottom,
-            modifier = Modifier
-                .background(Color.Black.copy(alpha = 0.8f))
-                .padding(contentPadding)
-        ) {
-            Spacer(
-                Modifier.height(12.dp)
-            )
-            Text(
-                text = stringResource(R.string.contact_us_title).uppercase(),
-                fontWeight = FontWeight.ExtraBold,
-                lineHeight = 46.sp,
-                fontSize = 36.sp,
-            )
-            Spacer(
-                Modifier.height(8.dp)
-            )
-            Text(
-                text = stringResource(R.string.contact_us_text),
-                fontSize = 20.sp,
-                lineHeight = 20.sp,
-                color = GOLD
-            )
-            Spacer(
-                Modifier.height(12.dp)
-            )
-        }
 
+        PageTopSection(
+            image = R.drawable.contact_us,
+            title = R.string.contact_us_title,
+            paragraph = R.string.contact_us_text,
+            imageHeight = screenHeightDp * 0.1f,
+            imageWidth = screenWidthDp
+            )
 
 //     input form
         Card(
@@ -119,121 +92,128 @@ fun ContactUsScreen(
             modifier = Modifier
                 .padding(contentPadding)
         ){
-            Column(
-//            horizontalAlignment = Alignment.End,
-                modifier = Modifier.padding(contentPadding)
-            ) {
-
-                Text(text = "",
-                style = TextStyle(
-                    fontSize = 24.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Color.Black
-                )
-            )
-               Row()
-               {
-                   Text(
-                       text = "Feedback\ntime".uppercase(),
-                       style = TextStyle(
-                           fontSize = 44.sp,
-                           lineHeight = 32.sp,
-                           color = Color.DarkGray,
-                           fontWeight = FontWeight.ExtraBold
-                       )
-                   )
-                   Spacer(
-                       modifier = Modifier.width(8.dp)
-                   )
-                   AsyncImage(
-                       model = R.drawable.form_illustration,
-                       contentDescription = "Form section",
-                       modifier = Modifier.size(height = 150.dp, width = 150.dp)
-                           .clip(RoundedCornerShape(20.dp))
-                           .background(Color.Black)
-                           .padding(4.dp)
-                   )
-               }
-
-                Spacer(modifier = Modifier.height(4.dp))
-
-                OutlinedTextField(
-                    state = titleInput,
-                    label = {
-                        Text("Title")
-                    },
-                    lineLimits = TextFieldLineLimits.MultiLine(maxHeightInLines = 2),
-                    leadingIcon = {
-                        Icon(
-                            painter = painterResource(R.drawable.title_icon),
-                            contentDescription = "Input message section",
-                            tint = Color.Gray
-                        )
-                    },
-                    colors = OutlinedTextFieldDefaults.colors(
-                        unfocusedLabelColor = Color.DarkGray,
-                        focusedLabelColor = Color.DarkGray,
-                        focusedBorderColor = GOLD,
-                        unfocusedBorderColor = Color.Black,
-                        unfocusedTextColor = Color.DarkGray,
-                        focusedTextColor = Color.Black
-                    ),
-                    shape = RoundedCornerShape(30.dp),
-                    modifier = Modifier.fillMaxWidth()
-
-                )
-                Spacer(modifier = Modifier.height(8.dp))
-                OutlinedTextField(
-                    state = messageInput,
-                    label = {
-                        Text("Message")
-                    },
-                    lineLimits = TextFieldLineLimits.MultiLine(minHeightInLines = 4, maxHeightInLines = 6),
-                    leadingIcon = {
-                        Icon(
-                            painter = painterResource(R.drawable.text_icon),
-                            contentDescription = "Input message section",
-                            tint = Color.Gray
-                        )
-                    },
-                    colors = OutlinedTextFieldDefaults.colors(
-                        unfocusedLabelColor = Color.DarkGray,
-                        focusedLabelColor = Color.DarkGray,
-                        focusedBorderColor = GOLD,
-                        unfocusedBorderColor = Color.Black,
-                        unfocusedTextColor = Color.DarkGray,
-                        focusedTextColor = Color.Black
-                    ),
-                    shape = RoundedCornerShape(30.dp),
-                    modifier = Modifier.fillMaxWidth()
-
-                )
-
-                Spacer(modifier = Modifier.height(8.dp))
-                Row(
-                    horizontalArrangement = Arrangement.End,
+            Box(
+                contentAlignment = Alignment.TopEnd
+            ){
+                AsyncImage(
+                    model = R.drawable.form_illustration,
+                    contentDescription = "Form section",
                     modifier = Modifier
-                        .fillMaxWidth()
+                        .size(height = 150.dp, width = 150.dp)
+                        .clip(RoundedCornerShape(20.dp))
+//                        .background(Color.Black)
+                        .padding(4.dp)
+                )
+                Column(
+//            horizontalAlignment = Alignment.End,
+                    modifier = Modifier.padding(contentPadding)
                 ) {
-                    Button(
-                        onClick = {
-                            messageInput.clearText()
-                            titleInput.clearText()
-                        }, // call back function,
-                        colors = ButtonColors(
-                            containerColor = GOLD,
-                            contentColor = Color.Black,
-                            disabledContainerColor = Color.Gray,
-                            disabledContentColor = Color.Black
+
+                    Text(text = "",
+                        style = TextStyle(
+                            fontSize = 24.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color.Black
                         )
+                    )
+                    Row()
+                    {
+                        Text(
+                            text = "Feedback\ntime".uppercase(),
+                            style = TextStyle(
+                                fontSize = 44.sp,
+                                lineHeight = 54.sp,
+                                color = Color.Black,
+                                fontWeight = FontWeight.ExtraBold
+                            )
+                        )
+                        Spacer(
+                            modifier = Modifier.width(12.dp)
+                        )
+
+                    }
+
+                    Spacer(modifier = Modifier.height(4.dp))
+
+                    OutlinedTextField(
+                        state = titleInput,
+                        label = {
+                            Text("Title")
+                        },
+                        lineLimits = TextFieldLineLimits.MultiLine(maxHeightInLines = 2),
+                        leadingIcon = {
+                            Icon(
+                                painter = painterResource(R.drawable.title_icon),
+                                contentDescription = "Input message section",
+                                tint = Color.Gray
+                            )
+                        },
+                        colors = OutlinedTextFieldDefaults.colors(
+                            unfocusedLabelColor = Color.DarkGray,
+                            focusedLabelColor = Color.Black,
+                            focusedBorderColor = GOLD,
+                            unfocusedBorderColor = Color.Black,
+                            unfocusedTextColor = Color.DarkGray,
+                            focusedTextColor = Color.Black
+                        ),
+                        shape = RoundedCornerShape(30.dp),
+                        modifier = Modifier.fillMaxWidth()
+
+                    )
+                    Spacer(modifier = Modifier.height(8.dp))
+                    OutlinedTextField(
+                        state = messageInput,
+                        label = {
+                            Text("Message")
+                        },
+                        lineLimits = TextFieldLineLimits.MultiLine(minHeightInLines = 4, maxHeightInLines = 6),
+                        leadingIcon = {
+                            Icon(
+                                painter = painterResource(R.drawable.text_icon),
+                                contentDescription = "Input message section",
+                                tint = Color.Gray
+                            )
+                        },
+                        colors = OutlinedTextFieldDefaults.colors(
+                            unfocusedLabelColor = Color.DarkGray,
+                            focusedLabelColor = Color.Black,
+                            focusedBorderColor = GOLD,
+                            unfocusedBorderColor = Color.Black,
+                            unfocusedTextColor = Color.DarkGray,
+                            focusedTextColor = Color.Black
+                        ),
+                        shape = RoundedCornerShape(30.dp),
+                        modifier = Modifier.fillMaxWidth()
+
+                    )
+
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Row(
+                        horizontalArrangement = Arrangement.End,
+                        modifier = Modifier
+                            .fillMaxWidth()
                     ) {
-                        Icon(
-                            painter = painterResource(R.drawable.send_icon),
-                            contentDescription = "Send message section"
-                        )
+                        Button(
+                            onClick = {
+                                messageInput.clearText()
+                                titleInput.clearText()
+                            }, // call back function,
+                            colors = ButtonColors(
+                                containerColor = GOLD,
+                                contentColor = Color.Black,
+                                disabledContainerColor = Color.Gray,
+                                disabledContentColor = Color.Black
+                            )
+                        ) {
+                            Icon(
+                                painter = painterResource(R.drawable.send_icon),
+                                contentDescription = "Send message section"
+                            )
+                        }
                     }
                 }
             }
+
         }
 
     }
