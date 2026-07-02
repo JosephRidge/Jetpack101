@@ -24,6 +24,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import coil3.compose.AsyncImage
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.animateLottieCompositionAsState
+import com.airbnb.lottie.compose.rememberLottieComposition
 import com.emobilis.jetpack101.R
 import com.emobilis.jetpack101.data.model.Route
 import com.emobilis.jetpack101.ui.navigation.About
@@ -126,3 +129,8 @@ fun PageTopSection( image: Any?,  title: Int, paragraph:Int, imageHeight: Dp, im
 
     }
 }
+
+/*
+* Lottie animation component
+*
+* */
