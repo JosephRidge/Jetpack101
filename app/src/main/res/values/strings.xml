@@ -4,8 +4,15 @@
     <string name="marketing_text">Our unified approach fuses world-class web design with aggressive data-driven marketing to turn casual visitors into loyal customers</string>
     <string name="web_design_title">Web Design: Built to convert</string>
     <string name="web_design_text">We don\'t just build beautiful websites; we engineer high-converting digital storefronts.</string>
+<!--    SEO Section-->
     <string name="seo_title">Search Engine Optimization(SEO)</string>
     <string name="seo_text">We take the guesswork out of organic growth. Our specialized SEO service optimizes your digital footprint to place your brand directly in front of high-intent buyers on Google. </string>
+   <string name="seo_importance">SEO puts your business where your customers are already looking. It builds trust, drives consistent organic traffic, lowers customer acquisition costs, and helps turn searchers into loyal customers—without relying only on paid ads.
+</string>
+   <string name="seo_definition">SEO is the art of making your brand impossible to ignore on Google—so the right people find you before they find your competitors. It turns searches into clicks, clicks into customers, and visibility into growth.</string>
+<string name="seo_checkout_title">Ready to take your business to the next level with SEO services?</string>
+<string name="seo_checkout_definition">Contact us to schedule a consultation and learn more about how we can help you get higher conversion rates</string>
+
     <string name="about_us_title">All Your Marketing, Managed in Place</string>
     <string name="about_us_text">Meet the world\'s first marketing agency inside an app. We built M-Agent to eliminate messy email chains, black-box reporting, and delayed launches.</string>
     <string name="contact_us_title">Coffee chat with us!</string>

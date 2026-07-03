@@ -28,7 +28,7 @@ fun Navigation(
         composable <Home>{ HomePage(modifier, innerPaddingValues, navHostController) }
         composable <About>{ AboutScreen(modifier) }
         composable<ContactUs> { ContactUsScreen(modifier) }
-        composable<SEO> { SEOScreen(modifier) }
+        composable<SEO> { SEOScreen(modifier, innerPaddingValues) }
         composable <Marketing>{ MarketingScreen(modifier) }
         composable <WebDevelopment>{ WebDevelopment(modifier) }
     }
